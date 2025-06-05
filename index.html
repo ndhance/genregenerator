@@ -299,7 +299,7 @@
       updateGenreList();
     }
 
-function exportHistory() {
+    function exportHistory() {
   let csv = "Song,Genre\n";
   document.querySelectorAll(".history-item").forEach(item => {
     const [song, genre] = item.textContent.split(" → ");

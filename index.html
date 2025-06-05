@@ -1,13 +1,14 @@
-<!-- START OF FILE -->
+<!-- FULL RESTORED VERSION WITH ENHANCEMENTS -->
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cocktail Combo - Genre Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cocktail Combo - Genre Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
     body {
       margin: 0;
       padding: 0;
@@ -162,33 +163,34 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1 style="text-align:center; padding:1rem 0;">🎹 Cocktail Combo - Genre Generator</h1>
-  </header>
-  <div class="main">
-    <div>
-      <div class="ticker" id="genreTicker"></div>
-      <div class="genres" id="genreList"></div>
-    </div>
-    <div class="center">
-      <div class="now-playing" id="currentDisplay">🎶 Waiting to spin...</div>
-      <input type="text" placeholder="Enter song title..." class="song-input" id="songInput">
-      <button class="btn" id="spinButton">Spin Genre</button>
-      <button class="btn" onclick="addCurrentSong()">Add Current Song</button>
-      <div class="requests-container">
-        <h2>Upcoming Requests</h2>
-        <input type="text" placeholder="Add request..." class="request-input" id="requestInput">
-        <button class="btn" onclick="addRequest()">Add Request</button>
-        <ul class="request-list" id="requestList"></ul>
-      </div>
-    </div>
-    <div class="history" id="history">
-      <h3>Performance History</h3>
-      <div id="historyList"></div>
-      <button class="btn export-small" onclick="exportHistory()">Export Song List</button>
-    </div>
-  </div>
-  <script>
+<header style="text-align:center; padding:1rem 0;">
+<img alt="Cocktail Combo Logo" src="https://www.cocktailcombo.com/uploads/b/8e0b0c00-1fd0-11ef-a7b4-875cbbdc69b3/cc-logo-stack-white_1717459606.png" style="max-width: 200px; height: auto; display: block; margin: 0 auto 1rem;"/>
+<h1 style="margin: 0;">🎹 Genre Generator</h1>
+</header>
+<div class="main">
+<div>
+<div class="ticker" id="genreTicker"></div>
+<div class="genres" id="genreList"></div>
+</div>
+<div class="center">
+<div class="now-playing" id="currentDisplay">🎶 Waiting to spin...</div>
+<input class="song-input" id="songInput" placeholder="Enter song title..." type="text"/>
+<button class="btn" id="spinButton">Spin Genre</button>
+<button class="btn" onclick="addCurrentSong()">Add Current Song</button>
+<div class="requests-container">
+<h2>Upcoming Requests</h2>
+<input class="request-input" id="requestInput" placeholder="Add request..." type="text"/>
+<button class="btn" onclick="addRequest()">Add Request</button>
+<ul class="request-list" id="requestList"></ul>
+</div>
+</div>
+<div class="history" id="history">
+<h3>Performance History</h3>
+<div id="historyList"></div>
+<button class="btn export-small" onclick="exportHistory()">Export Song List</button>
+</div>
+</div>
+<script>
     const genres = ["Blues", "Boogie Woogie", "Bossa Nova", "Classical", "Country", "Disco", "Funk", "Hip Hop", "Jig", "Jazz", "Latin", "Mood Change", "Musical Theatre", "Punk", "R&B", "Ragtime", "Reggae", "Hard Rock", "Tango", "EDM", "Polka", "Ballad", "Bluegrass", "Lo-fi", "Big Band", "Lounge", "Lullaby", "Kids Music", "Doo Wop", "Yacht Rock"];
     let availableGenres = [...genres];
     let playedGenres = [];
@@ -269,6 +271,7 @@
     }
 
     spinButton.addEventListener("click", generateGenre);
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -300,23 +303,27 @@
       updateGenreList();
     }
 
-    function exportHistory() {
-      let csv = "Song,Genre\n";
-      document.querySelectorAll(".history-item").forEach(item => {
-        const [song, genre] = item.textContent.split(" → ");
-        csv += `"${song.trim()}","${genre.trim()}"\n`;
-      });
+    
+function exportHistory() {
+  let csv = "Song,Genre
+";
+  document.querySelectorAll(".history-item").forEach(item => {
+    const [song, genre] = item.textContent.split(" → ");
+    csv += `"\${song.trim()}","\${genre.trim()}"
+`;
+  });
 
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'genre-history.csv';
-      a.click();
-      URL.revokeObjectURL(url);
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'genre-history.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 
-      console.log("✅ Exported as CSV");
-    }
+  console.log("✅ Exported as CSV");
+}
+
 
     function addRequest() {
       const text = requestInput.value.trim();

@@ -231,7 +231,9 @@
         availableGenres = availableGenres.filter(x => x !== g);
       }
       currentGenreBox = null;
-      updateGenreList();
+      window.onload = function() {
+  updateGenreList();
+};
     }
 
     function generateGenre() {
@@ -264,7 +266,9 @@
           playedGenres.push(genre);
           availableGenres = availableGenres.filter(g => g !== genre);
           addToHistory(songTitle, genre);
-          updateGenreList();
+          window.onload = function() {
+  updateGenreList();
+};
           confetti({ spread: 90, origin: { y: 0.6 } });
         }
       }, delay);
@@ -300,7 +304,9 @@
       playedGenres = playedGenres.filter(g => g !== genre.trim());
       availableGenres.push(genre.trim());
       item.remove();
-      updateGenreList();
+      window.onload = function() {
+  updateGenreList();
+};
     }
 
     

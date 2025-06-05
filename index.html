@@ -1,9 +1,8 @@
-<!-- FULL RESTORED VERSION WITH ENHANCEMENTS -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cocktail Combo - Genre Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -269,7 +268,6 @@
     }
 
     spinButton.addEventListener("click", generateGenre);
-
     document.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -305,12 +303,19 @@
       const rows = document.querySelectorAll(".history-item");
       rows.forEach(item => {
         const [song, genre] = item.textContent.split(" → ");
+        const formData = new URLSearchParams();
+        formData.append("song", song);
+        formData.append("genre", genre);
+
         fetch("https://script.google.com/macros/s/AKfycbwgKsRkNXXhLYvGJYt_sTIe-uo1jM5mTD-9UtUkipYQ0fMcpdujuzcUZjY6ZaInlo6sEw/exec", {
           method: "POST",
-          body: JSON.stringify({ song, genre }),
-          headers: { "Content-Type": "application/json" }
-        });
+          body: formData
+        })
+        .then(res => res.text())
+        .then(text => console.log("✅ Exported:", song, genre, "→", text))
+        .catch(err => console.error("❌ Export failed:", err));
       });
+
       alert("Exported to Google Sheet!");
     }
 

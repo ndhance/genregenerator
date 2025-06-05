@@ -163,12 +163,7 @@
 </head>
 <body>
   <header>
-    
-    <header style="text-align:center; padding:1rem 0;">
-      <img src="https://raw.githubusercontent.com/ndhance/genregenerator/9cef2f8d448fe433d84e1c635b3079294864b958/CC%20logo%20stack%20white.png" alt="Cocktail Combo Logo" style="max-width: 200px; height: auto; display: block; margin: 0 auto 1rem;">
-      <h1 style="margin: 0;">Genre Generator</h1>
-    </header>
-    
+    <h1 style="text-align:center; padding:1rem 0;">🎹 Cocktail Combo - Genre Generator</h1>
   </header>
   <div class="main">
     <div>
@@ -306,27 +301,24 @@
       updateGenreList();
     }
 
-    
-function exportHistory() {
-  let csv = "Song,Genre
-";
-  document.querySelectorAll(".history-item").forEach(item => {
-    const [song, genre] = item.textContent.split(" → ");
-    csv += `"\${song.trim()}","\${genre.trim()}"
-`;
-  });
+    function exportHistory() {
+      const rows = document.querySelectorAll(".history-item");
+      rows.forEach(item => {
+        const [song, genre] = item.textContent.split(" → ");
+        const formData = new URLSearchParams();
+        formData.append("song", song);
+        formData.append("genre", genre);
 
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'genre-history.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-
-  console.log("✅ Exported as CSV");
-}
-
+        fetch("https://script.google.com/macros/s/AKfycbwgKsRkNXXhLYvGJYt_sTIe-uo1jM5mTD-9UtUkipYQ0fMcpdujuzcUZjY6ZaInlo6sEw/exec", {
+          method: "POST",
+          body: formData
+        })
+        .then(res => res.text())
+        .then(text => console.log("✅ Exported:", song, genre, "→", text))
+        .catch(err => console.error("❌ Export failed:", err));
+      });
+      alert("Exported to Google Sheet!");
+    }
 
     function addRequest() {
       const text = requestInput.value.trim();

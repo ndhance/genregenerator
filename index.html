@@ -299,25 +299,23 @@
       updateGenreList();
     }
 
-    function exportHistory() {
-      const rows = document.querySelectorAll(".history-item");
-      rows.forEach(item => {
-        const [song, genre] = item.textContent.split(" → ");
-        const formData = new URLSearchParams();
-        formData.append("song", song);
-        formData.append("genre", genre);
+function exportHistory() {
+  let csv = "Song,Genre\n";
+  document.querySelectorAll(".history-item").forEach(item => {
+    const [song, genre] = item.textContent.split(" → ");
+    csv += `"${song.trim()}","${genre.trim()}"\n`;
+  });
 
-        fetch("https://script.google.com/macros/s/AKfycbwgKsRkNXXhLYvGJYt_sTIe-uo1jM5mTD-9UtUkipYQ0fMcpdujuzcUZjY6ZaInlo6sEw/exec", {
-          method: "POST",
-          body: formData
-        })
-        .then(res => res.text())
-        .then(text => console.log("✅ Exported:", song, genre, "→", text))
-        .catch(err => console.error("❌ Export failed:", err));
-      });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'genre-history.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 
-      alert("Exported to Google Sheet!");
-    }
+  console.log("✅ Exported as CSV");
+}
 
     function addRequest() {
       const text = requestInput.value.trim();

@@ -1,3 +1,4 @@
+<!-- START OF FILE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -300,22 +301,22 @@
     }
 
     function exportHistory() {
-  let csv = "Song,Genre\n";
-  document.querySelectorAll(".history-item").forEach(item => {
-    const [song, genre] = item.textContent.split(" → ");
-    csv += `"${song.trim()}","${genre.trim()}"\n`;
-  });
+      let csv = "Song,Genre\n";
+      document.querySelectorAll(".history-item").forEach(item => {
+        const [song, genre] = item.textContent.split(" → ");
+        csv += `"${song.trim()}","${genre.trim()}"\n`;
+      });
 
-  const blob = new Blob([csv], { type: 'text/csv' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'genre-history.csv';
-  a.click();
-  URL.revokeObjectURL(url);
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'genre-history.csv';
+      a.click();
+      URL.revokeObjectURL(url);
 
-  console.log("✅ Exported as CSV");
-}
+      console.log("✅ Exported as CSV");
+    }
 
     function addRequest() {
       const text = requestInput.value.trim();

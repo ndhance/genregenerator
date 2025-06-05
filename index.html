@@ -1,14 +1,13 @@
 <!-- FULL RESTORED VERSION WITH ENHANCEMENTS -->
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cocktail Combo - Genre Generator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cocktail Combo - Genre Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
     body {
       margin: 0;
       padding: 0;
@@ -163,34 +162,33 @@
   </style>
 </head>
 <body>
-<header style="text-align:center; padding:1rem 0;">
-<img alt="Cocktail Combo Logo" src="https://raw.githubusercontent.com/ndhance/genregenerator/9cef2f8d448fe433d84e1c635b3079294864b958/CC%20logo%20stack%20white.png" style="max-width: 200px; height: auto; display: block; margin: 0 auto 1rem;"/>
-<h1 style="margin: 0;">Genre Generator</h1>
-</header>
-<div class="main">
-<div>
-<div class="ticker" id="genreTicker"></div>
-<div class="genres" id="genreList"></div>
-</div>
-<div class="center">
-<div class="now-playing" id="currentDisplay">🎶 Waiting to spin...</div>
-<input class="song-input" id="songInput" placeholder="Enter song title..." type="text"/>
-<button class="btn" id="spinButton">Spin Genre</button>
-<button class="btn" onclick="addCurrentSong()">Add Current Song</button>
-<div class="requests-container">
-<h2>Upcoming Requests</h2>
-<input class="request-input" id="requestInput" placeholder="Add request..." type="text"/>
-<button class="btn" onclick="addRequest()">Add Request</button>
-<ul class="request-list" id="requestList"></ul>
-</div>
-</div>
-<div class="history" id="history">
-<h3>Performance History</h3>
-<div id="historyList"></div>
-<button class="btn export-small" onclick="exportHistory()">Export Song List</button>
-</div>
-</div>
-<script>
+  <header>
+    <h1 style="text-align:center; padding:1rem 0;">🎹 Cocktail Combo - Genre Generator</h1>
+  </header>
+  <div class="main">
+    <div>
+      <div class="ticker" id="genreTicker"></div>
+      <div class="genres" id="genreList"></div>
+    </div>
+    <div class="center">
+      <div class="now-playing" id="currentDisplay">🎶 Waiting to spin...</div>
+      <input type="text" placeholder="Enter song title..." class="song-input" id="songInput">
+      <button class="btn" id="spinButton">Spin Genre</button>
+      <button class="btn" onclick="addCurrentSong()">Add Current Song</button>
+      <div class="requests-container">
+        <h2>Upcoming Requests</h2>
+        <input type="text" placeholder="Add request..." class="request-input" id="requestInput">
+        <button class="btn" onclick="addRequest()">Add Request</button>
+        <ul class="request-list" id="requestList"></ul>
+      </div>
+    </div>
+    <div class="history" id="history">
+      <h3>Performance History</h3>
+      <div id="historyList"></div>
+      <button class="btn export-small" onclick="exportHistory()">Export Song List</button>
+    </div>
+  </div>
+  <script>
     const genres = ["Blues", "Boogie Woogie", "Bossa Nova", "Classical", "Country", "Disco", "Funk", "Hip Hop", "Jig", "Jazz", "Latin", "Mood Change", "Musical Theatre", "Punk", "R&B", "Ragtime", "Reggae", "Hard Rock", "Tango", "EDM", "Polka", "Ballad", "Bluegrass", "Lo-fi", "Big Band", "Lounge", "Lullaby", "Kids Music", "Doo Wop", "Yacht Rock"];
     let availableGenres = [...genres];
     let playedGenres = [];
@@ -231,9 +229,7 @@
         availableGenres = availableGenres.filter(x => x !== g);
       }
       currentGenreBox = null;
-      window.onload = function() {
-  updateGenreList();
-};
+      updateGenreList();
     }
 
     function generateGenre() {
@@ -266,9 +262,7 @@
           playedGenres.push(genre);
           availableGenres = availableGenres.filter(g => g !== genre);
           addToHistory(songTitle, genre);
-          window.onload = function() {
-  updateGenreList();
-};
+          updateGenreList();
           confetti({ spread: 90, origin: { y: 0.6 } });
         }
       }, delay);
@@ -304,9 +298,7 @@
       playedGenres = playedGenres.filter(g => g !== genre.trim());
       availableGenres.push(genre.trim());
       item.remove();
-      window.onload = function() {
-  updateGenreList();
-};
+      updateGenreList();
     }
 
     
@@ -347,10 +339,7 @@ function exportHistory() {
       li.remove();
     }
 
-    window.onload = function() {
-  updateGenreList();
-};
+    updateGenreList();
   </script>
 </body>
 </html>
-
